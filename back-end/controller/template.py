@@ -11,8 +11,8 @@ filelist = glob(
 templates = []
 for filepath in filelist:
     with open(filepath, 'rb') as image_file:
-        encoded_string = str(base64.b64encode(image_file.read()))
-    encoded_string = encoded_string[2:-1]
+        encoded_string = base64.b64encode(image_file.read()).decode('utf-8')
+    encoded_string = encoded_string
     _, filename = os.path.split(filepath)
     id, label = filename.split('-')
     id = int(id)
