@@ -3,43 +3,17 @@ import { useState, useEffect } from 'react'
 import styles from './style.module.css'
 import { TemplateCard } from '../index'
 import { MemeTemplate } from '../../types/meme'
+import { getTemplates } from '../../services/meme'
 
 function Home() {
     const [templates, setTemplates] = useState<MemeTemplate[]>([])
 
     useEffect(() => {
-        setTemplates([
-            {
-                id: 0,
-                label: 'Drake Hotline Bling',
-                imageBinary: '123456'
-            },
-            {
-                id: 0,
-                label: 'Drake Hotline Bling',
-                imageBinary: '123456'
-            },
-            {
-                id: 0,
-                label: 'Drake Hotline Bling',
-                imageBinary: '123456'
-            },
-            {
-                id: 0,
-                label: 'Drake Hotline Bling',
-                imageBinary: '123456'
-            },
-            {
-                id: 0,
-                label: 'Drake Hotline Bling',
-                imageBinary: '123456'
-            },
-            {
-                id: 0,
-                label: 'Drake Hotline Bling',
-                imageBinary: '123456'
-            },
-        ])
+        (async () => {
+            const templates = await getTemplates()
+            setTemplates(templates)
+            console.log(templates[0])
+        })()
     }, [])
 
     return (
@@ -50,7 +24,7 @@ function Home() {
             <div className={styles.cardContainer}>
                 {
                     templates.map(template => (
-                        <TemplateCard template={template}/>
+                        <TemplateCard template={template} key={template.id}/>
                     ))
                 }
             </div>            
