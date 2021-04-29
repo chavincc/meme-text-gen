@@ -3,6 +3,7 @@ from flask_cors import CORS, cross_origin
 
 
 import controller.template as template
+import controller.generation as generation
 
 
 app = Flask(__name__)
@@ -32,6 +33,28 @@ def GET_templates():
         response = template.get_template(int(id))
     return Response(
         response=json.dumps(response),
+        status=200,
+        mimetype='application/json'
+    )
+
+
+@app.route('/generation', methods=['GET'])
+@cross_origin()
+def GET_generated_meme():
+    print('request')
+    id = request.args.get('id')
+    if not id or id == '':
+        return Response (
+            response=json.dumps({
+                'message': 'error : please provide meme id'
+            }),
+            status=400,
+            mimetype='application/json'
+        )
+
+    content = generation.generate_meme(id)       
+    return Response (
+        response=json.dumps(content),
         status=200,
         mimetype='application/json'
     )
