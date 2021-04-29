@@ -1,0 +1,25 @@
+.navbar {
+  background: #8dafff;
+  padding: 30px;
+  display: flex;
+  align-items: center;
+}
+
+.logo {
+  font-weight: 800;
+  font-size: 20px;
+  line-height: 24px;
+}
+
+.menuItemContainer {
+  margin-left: 60px;
+}
+
+.menuItem {
+  text-decoration: none;
+  color: #333638;
+}
+.menuItem:hover {
+  color: black;
+  text-decoration: underline;
+}
