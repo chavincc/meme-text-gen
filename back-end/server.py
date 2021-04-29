@@ -24,6 +24,7 @@ def base():
 @app.route('/templates', methods=['GET'])
 @cross_origin()
 def GET_templates():
+    print('request')
     id = request.args.get('id')
     if not id or id == '':
         response = template.get_all_templates()
