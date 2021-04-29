@@ -1,0 +1,13 @@
+.header {
+  border-bottom: 1px solid #5e6d73;
+  padding: 20px 0;
+  font-size: 40px;
+  text-align: left;
+  font-weight: 600;
+}
+
+.cardContainer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+}
