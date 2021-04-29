@@ -5,7 +5,7 @@ import GetAppIcon from '@material-ui/icons/GetApp';
 import CachedIcon from '@material-ui/icons/Cached';
 
 import { MemeTemplate } from '../../types/meme'
-import { getTemplateById } from '../../services/meme'
+import { getTemplateById, getGeneratedContent } from '../../services/meme'
 import { Meme } from '../index'
 import styles from './style.module.css'
 
@@ -21,10 +21,16 @@ function Generation() {
 
     useEffect(() => {
         (async () => {
-            const response = await getTemplateById(parseInt(id))
-            setTemplate(response)
+            refreshMemeText(parseInt(id))
+            const template = await getTemplateById(parseInt(id))
+            setTemplate(template)
         })()
     }, [id])
+
+    const refreshMemeText = async (id: number) => {
+        const memeText = await getGeneratedContent(id)
+        setMemeText(memeText)
+    }
 
     const handleInput = (e: any) => {
         setMemeText(e.target.value)
@@ -58,7 +64,10 @@ function Generation() {
                     </button>
                 </div>
                 <div className={styles.columnCenter}>
-                    <button className={styles.buttonSecondary}>
+                    <button
+                        className={styles.buttonSecondary}
+                        onClick={()=>{refreshMemeText(template.id)}}
+                    >
                         <CachedIcon/>
                         <span className={styles.buttonText}>generate again</span>
                     </button>
