@@ -43,6 +43,7 @@ def GET_templates():
 def GET_generated_meme():
     print('request')
     id = request.args.get('id')
+    seed = request.args.get('seed')
     if not id or id == '':
         return Response (
             response=json.dumps({
@@ -52,7 +53,9 @@ def GET_generated_meme():
             mimetype='application/json'
         )
 
-    content = generation.generate_meme(id)       
+    if not seed:
+        seed = ''
+    content = generation.generate_meme(seed, id)       
     return Response (
         response=json.dumps(content),
         status=200,
