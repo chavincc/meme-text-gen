@@ -14,26 +14,26 @@ interface ParamsTypes {
 }
 
 function Generation() {
+    const defaultSeed = 'me when i'
+
     const { id } = useParams<ParamsTypes>()
     const [template, setTemplate] = useState<MemeTemplate>()
-    const [memeText, setMemeText] = useState<string>('nicky nachat <SEP> nicky napat')
+    const [memeText, setMemeText] = useState<string>('')
+    const [seedText, setSeedText] = useState<string>(defaultSeed)
+
     const memeRef = useRef<HTMLDivElement>(null)
 
     useEffect(() => {
         (async () => {
-            refreshMemeText(parseInt(id))
+            refreshMemeText(defaultSeed, parseInt(id))
             const template = await getTemplateById(parseInt(id))
             setTemplate(template)
         })()
-    }, [id])
+    }, [id, defaultSeed])
 
-    const refreshMemeText = async (id: number) => {
-        const memeText = await getGeneratedContent(id)
+    const refreshMemeText = async (seedText: string, id: number) => {
+        const memeText = await getGeneratedContent(seedText, id)
         setMemeText(memeText)
-    }
-
-    const handleInput = (e: any) => {
-        setMemeText(e.target.value)
     }
 
     if (template) return (
@@ -44,12 +44,19 @@ function Generation() {
                 </div>            
                 <div className={styles.column}>
                     <div className={styles.memeLabel}>{template.label}</div>
+                    <div className={styles.inputLabel}>Seed text :</div>
+                    <textarea
+                        className={styles.textarea}
+                        value={seedText}
+                        spellCheck='false'
+                        onChange={e => setSeedText(e.target.value)}
+                    />
                     <div className={styles.inputLabel}>Generated text :</div>
                     <textarea
                         className={styles.textarea}
                         value={memeText}
                         spellCheck='false'
-                        onChange={handleInput}
+                        onChange={e => setMemeText(e.target.value)}
                     />
                 </div>
             </div>
@@ -66,7 +73,7 @@ function Generation() {
                 <div className={styles.columnCenter}>
                     <button
                         className={styles.buttonSecondary}
-                        onClick={()=>{refreshMemeText(template.id)}}
+                        onClick={()=>{refreshMemeText(seedText, template.id)}}
                     >
                         <CachedIcon/>
                         <span className={styles.buttonText}>generate again</span>

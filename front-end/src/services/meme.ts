@@ -12,7 +12,7 @@ export const getTemplateById = async (id: number) => {
     return response.data
 }
 
-export const getGeneratedContent = async (id: number) => {
-    const response = await axios.get(`${ENDPOINT}/generation?id=${id}`)
+export const getGeneratedContent = async (seed: string, id: number) => {
+    const response = await axios.get(`${ENDPOINT}/generation?id=${id}&seed=${seed}`)
     return response.data
 }
