@@ -9,13 +9,153 @@
   height: 100%;
 }
 
-.text1 {
+.textTopRight {
   position: absolute;
+  text-align: center;
+
   top: 0;
-  right: 25%;
+  right: 0;
+  width: 50%;
+  height: 50%;
+  padding: 15px;
 }
-.text2 {
+.textBottomRight {
   position: absolute;
+  text-align: center;
+
   top: 50%;
-  right: 25%;
+  right: 0;
+  width: 50%;
+  height: 50%;
+  padding: 15px;
+}
+
+.textTopLeft {
+  position: absolute;
+  text-align: center;
+
+  top: 0;
+  left: 0;
+  width: 50%;
+  height: 50%;
+  padding: 15px;
+}
+.textBottomLeft {
+  position: absolute;
+  text-align: center;
+
+  top: 50%;
+  left: 0;
+  width: 50%;
+  height: 50%;
+  padding: 15px;
+}
+
+.textTop {
+  position: absolute;
+  text-align: center;
+
+  top: 0;
+  width: 100%;
+  height: 25%;
+  padding: 10px;
+  color: white;
+  font-weight: 600;
+}
+.textBottom {
+  position: absolute;
+  text-align: center;
+
+  bottom: 0;
+  width: 100%;
+  height: 20%;
+  padding: 10px;
+  color: white;
+  font-weight: 600;
+}
+
+.textHighLeft {
+  position: absolute;
+  text-align: center;
+
+  top: 0;
+  left: 0;
+  width: 50%;
+  height: 25%;
+  padding: 10px;
+}
+.textHighRight {
+  position: absolute;
+  text-align: center;
+
+  top: 0;
+  right: 0;
+  width: 50%;
+  height: 25%;
+  padding: 10px;
+}
+
+.trumpLeft {
+  position: absolute;
+  text-align: center;
+
+  top: 35%;
+  left: 38%;
+  width: 28%;
+  height: 45%;
+  padding: 15px;
+}
+.trumpRight {
+  position: absolute;
+  text-align: center;
+
+  top: 35%;
+  left: 66%;
+  width: 28%;
+  height: 45%;
+  padding: 15px;
+}
+
+.rockTop {
+  position: absolute;
+  text-align: center;
+
+  top: 4%;
+  left: 55%;
+  width: 44%;
+  height: 17%;
+  padding: 15px;
+}
+.rockMiddle {
+  position: absolute;
+  text-align: center;
+
+  top: 37%;
+  left: 57%;
+  width: 42%;
+  height: 16%;
+  padding: 15px;
+}
+
+.inScroll {
+  position: absolute;
+  text-align: center;
+
+  top: 55%;
+  left: 17%;
+  width: 21%;
+  height: 30%;
+  padding: 15px;
+  font-weight: 600;
+}
+.outScroll {
+  position: absolute;
+  text-align: center;
+
+  top: 75%;
+  left: 50%;
+  width: 21%;
+  height: 20%;
+  padding: 10px;
+  font-weight: 600;
 }
