@@ -1,10 +1,32 @@
-import random
+import os
+from .template import get_template
+from transformers import GPT2LMHeadModel,  GPT2Tokenizer
+
+output_dir = os.path.abspath(
+        os.path.join(
+        os.path.realpath(__file__), '..', 'model_weights'
+    ))
+model = GPT2LMHeadModel.from_pretrained(output_dir)
+tokenizer = GPT2Tokenizer.from_pretrained(output_dir)
+model = model.cuda()
 
 def generate_meme(seed, id):
-    # id: integer = meme id
-    mock = [
-        f'{seed} nicky nachat <SEP> nicky napat',
-        f'{seed} my mom when I word another word ok cool <SEP> nicky when i the cat lmao',
-        f'{seed} Lorem ipsum dolor sit amet consectetur adipisicing elit. Vitae ratione blanditiis nisi voluptas deserunt? Ut? <SEP> Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, sapiente.'
-    ]
-    return random.choice(mock)
+    model.eval()
+    prompt = f'<|startoftext|> {get_template(id)} {seed}'
+
+    generated = torch.tensor(tokenizer.encode(prompt)).unsqueeze(0)
+    generated = generated.cuda()
+
+    sample_outputs = model.generate(
+                                    generated, 
+                                    #bos_token_id=random.randint(1,30000),
+                                    do_sample=True,   
+                                    top_k=50, 
+                                    max_length = 300,
+                                    top_p=0.95, 
+                                    num_return_sequences=1
+                                    )
+
+    return tokenizer.decode(sample_outputs[0], skip_special_tokens=False)
+
+print(template.get_template(0))
