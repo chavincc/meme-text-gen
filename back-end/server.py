@@ -25,7 +25,6 @@ def base():
 @app.route('/templates', methods=['GET'])
 @cross_origin()
 def GET_templates():
-    print('request')
     id = request.args.get('id')
     if not id or id == '':
         response = template.get_all_templates()
@@ -41,7 +40,6 @@ def GET_templates():
 @app.route('/generation', methods=['GET'])
 @cross_origin()
 def GET_generated_meme():
-    print('request')
     id = request.args.get('id')
     seed = request.args.get('seed')
     if not id or id == '':

@@ -1,5 +1,6 @@
 import os
 from .template import get_template
+import torch
 from transformers import GPT2LMHeadModel,  GPT2Tokenizer
 
 output_dir = os.path.abspath(
@@ -12,7 +13,7 @@ model = model.cuda()
 
 def generate_meme(seed, id):
     model.eval()
-    prompt = f'<|startoftext|> {get_template(id)} {seed}'
+    prompt = f"<|startoftext|> [{get_template(int(id))['label']}] {seed}"
 
     generated = torch.tensor(tokenizer.encode(prompt)).unsqueeze(0)
     generated = generated.cuda()
@@ -27,6 +28,4 @@ def generate_meme(seed, id):
                                     num_return_sequences=1
                                     )
 
-    return tokenizer.decode(sample_outputs[0], skip_special_tokens=False)
-
-print(template.get_template(0))
+    return tokenizer.decode(sample_outputs[0][2:-1], skip_special_tokens=False)
